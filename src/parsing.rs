@@ -1,7 +1,5 @@
-use std::io::Read as _;
-
 pub fn input() -> String {
     let mut s = String::new();
-    std::io::stdin().read_to_string(&mut s).unwrap();
+    std::io::stdin().read_line(&mut s).unwrap();
     s.trim().to_string()
 }
