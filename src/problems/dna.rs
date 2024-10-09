@@ -20,3 +20,16 @@ fn solve(input: &str) -> [usize; 4] {
     }
     counts
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_solve() {
+        assert_eq!(
+            solve("AGCTTTTCATTCTGACTGCAACGGGCAATATGTCTCTGTGTGGATTAAAAAAAGAGTGTCTGATAGCAGC"),
+            [20, 12, 17, 21]
+        );
+    }
+}
