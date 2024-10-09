@@ -1,10 +1,8 @@
+use crate::parsing::input;
 use itertools::Itertools as _;
-use std::io::Read as _;
 
 pub fn subject() -> String {
-    let mut input = String::new();
-    std::io::stdin().read_to_string(&mut input).unwrap();
-    solve(&input.trim()).iter().map(usize::to_string).join(" ")
+    solve(&input()).iter().map(usize::to_string).join(" ")
 }
 
 fn solve(input: &str) -> [usize; 4] {

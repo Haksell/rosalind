@@ -1,9 +1,7 @@
-use std::io::Read as _;
+use crate::parsing::input;
 
 pub fn subject() -> String {
-    let mut input = String::new();
-    std::io::stdin().read_to_string(&mut input).unwrap();
-    solve(&input.trim())
+    solve(&input())
 }
 
 fn solve(dna: &str) -> String {

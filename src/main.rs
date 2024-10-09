@@ -1,3 +1,4 @@
+mod parsing;
 mod problems;
 
 use crate::problems::PROBLEMS;
