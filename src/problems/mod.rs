@@ -6,6 +6,7 @@ mod iprb;
 mod prot;
 mod revc;
 mod rna;
+mod subs;
 
 use lazy_static::lazy_static;
 use std::collections::HashMap;
@@ -20,5 +21,6 @@ lazy_static! {
         ("prot".to_string(), prot::subject as fn() -> String),
         ("revc".to_string(), revc::subject as fn() -> String),
         ("rna".to_string(), rna::subject as fn() -> String),
+        ("subs".to_string(), subs::subject as fn() -> String),
     ]);
 }
