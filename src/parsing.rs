@@ -23,7 +23,7 @@ where
         .collect()
 }
 
-macro_rules! mints {
+macro_rules! tints {
     (2, $t:ty) => {{
         let v = crate::parsing::vints::<$t>();
         if v.len() != 2 {

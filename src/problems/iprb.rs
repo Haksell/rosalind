@@ -1,5 +1,5 @@
 pub fn subject() -> String {
-    let (hod, het, hor) = mints!(3, u64);
+    let (hod, het, hor) = tints!(3, u64);
     solve(hod, het, hor).to_string()
 }
 

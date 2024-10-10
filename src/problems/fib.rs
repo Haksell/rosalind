@@ -1,5 +1,5 @@
 pub fn subject() -> String {
-    let (n, k) = mints!(2, u128);
+    let (n, k) = tints!(2, u128);
     solve(n, k).to_string()
 }
 
