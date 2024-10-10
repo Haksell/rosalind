@@ -1,8 +1,7 @@
+use crate::parsing::input;
 use itertools::Itertools as _;
 use lazy_static::lazy_static;
 use std::collections::HashMap;
-
-use crate::parsing::input;
 
 const STOP_CODON: char = 'Z';
 
