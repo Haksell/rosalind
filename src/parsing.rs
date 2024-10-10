@@ -6,7 +6,7 @@ pub fn input() -> String {
     s.trim().to_string()
 }
 
-pub fn ints<T>() -> Vec<T>
+pub fn vints<T>() -> Vec<T>
 where
     T: FromStr,
     T::Err: std::fmt::Debug,
@@ -15,4 +15,14 @@ where
         .split_whitespace()
         .map(|s| s.parse::<T>().unwrap())
         .collect()
+}
+
+macro_rules! mints {
+    (2, $t:ty) => {{
+        let v = crate::parsing::vints::<$t>();
+        if v.len() != 2 {
+            panic!("Expected 2 elements, but got {}", v.len());
+        }
+        (v[0], v[1])
+    }};
 }

@@ -1,7 +1,5 @@
-use crate::parsing::ints;
-
 pub fn subject() -> String {
-    let [n, k] = ints::<u128>()[..2] else { todo!() };
+    let (n, k) = mints!(2, u128);
     solve(n, k).to_string()
 }
 
