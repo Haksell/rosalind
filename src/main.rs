@@ -1,4 +1,6 @@
 #[macro_use]
+mod floats;
+#[macro_use]
 mod parsing;
 mod problems;
 
