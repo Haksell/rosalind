@@ -9,7 +9,7 @@ pub fn input() -> String {
 pub fn read_all() -> String {
     let mut s = String::new();
     std::io::stdin().read_to_string(&mut s).unwrap();
-    s.trim().to_string()
+    s
 }
 
 pub fn vints<T>() -> Vec<T>
