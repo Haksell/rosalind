@@ -31,4 +31,11 @@ macro_rules! mints {
         }
         (v[0], v[1])
     }};
+    (3, $t:ty) => {{
+        let v = crate::parsing::vints::<$t>();
+        if v.len() != 3 {
+            panic!("Expected 3 elements, but got {}", v.len());
+        }
+        (v[0], v[1], v[2])
+    }};
 }

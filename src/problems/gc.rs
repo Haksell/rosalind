@@ -12,7 +12,7 @@ pub fn subject() -> String {
     format!("{}\n{}", name, gc_content * 100.0)
 }
 
-fn solve(dna_strands: &[(String, String)]) -> (&String, f32) {
+fn solve(dna_strands: &[(String, String)]) -> (&String, f64) {
     dna_strands
         .iter()
         .map(|(name, content)| (name, calculate_gc_content(content)))
@@ -20,8 +20,8 @@ fn solve(dna_strands: &[(String, String)]) -> (&String, f32) {
         .unwrap()
 }
 
-fn calculate_gc_content(dna: &str) -> f32 {
-    dna.chars().filter(|&c| c == 'C' || c == 'G').count() as f32 / dna.len() as f32
+fn calculate_gc_content(dna: &str) -> f64 {
+    dna.chars().filter(|&c| c == 'C' || c == 'G').count() as f64 / dna.len() as f64
 }
 
 #[cfg(test)]
