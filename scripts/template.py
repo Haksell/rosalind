@@ -29,26 +29,25 @@ name = sys.argv[1]
 
 problem_filename = f"src/problems/{name}.rs"
 
-mods, top, inserts, bottom = re.fullmatch(
-    r"((?:mod \w+;\n)+)(.*?)((?: +map\.insert[^\n]*;\n)+)(.*)",
+mods, top, pairs, bottom = re.fullmatch(
+    r"((?:mod \w+;\n)+)(.*?)(?:( {8}.* -> String\),\n)+)(.*)",
     open(MOD_FILENAME).read(),
     re.DOTALL | re.MULTILINE,
 ).groups()
+
 
 new_mod = f"mod {name};"
 assert new_mod not in mods
 mods = "\n".join(sorted(mods.splitlines() + [new_mod]))
 
-new_insert = (
-    f'        map.insert("{name}".to_string(), {name}::subject as fn() -> String);'
-)
-inserts = "\n".join(
+new_pair = f'        ("{name}".to_string(), {name}::subject as fn() -> String),'
+pairs = "\n".join(
     sorted(
-        inserts.splitlines() + [new_insert],
+        pairs.splitlines() + [new_pair],
         key=lambda s: s.split('"')[1],
     )
 )
 
-open(MOD_FILENAME, "w").write(mods + "\n" + top + inserts + "\n" + bottom)
+open(MOD_FILENAME, "w").write(mods + "\n" + top + pairs + "\n" + bottom)
 open(problem_filename, "w").write(TEMPLATE)
 os.system(f"code {problem_filename}")
