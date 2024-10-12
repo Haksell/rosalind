@@ -1,6 +1,7 @@
 mod cons;
 mod dna;
 mod fib;
+mod fibd;
 mod gc;
 mod hamm;
 mod iprb;
@@ -17,6 +18,7 @@ lazy_static! {
         ("cons".to_string(), cons::subject as fn() -> String),
         ("dna".to_string(), dna::subject as fn() -> String),
         ("fib".to_string(), fib::subject as fn() -> String),
+        ("fibd".to_string(), fibd::subject as fn() -> String),
         ("gc".to_string(), gc::subject as fn() -> String),
         ("hamm".to_string(), hamm::subject as fn() -> String),
         ("iprb".to_string(), iprb::subject as fn() -> String),
