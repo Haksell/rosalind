@@ -6,6 +6,7 @@ mod gc;
 mod grph;
 mod hamm;
 mod iev;
+mod ini1;
 mod iprb;
 mod prot;
 mod revc;
@@ -25,6 +26,7 @@ lazy_static! {
         ("grph".to_string(), grph::subject as fn() -> String),
         ("hamm".to_string(), hamm::subject as fn() -> String),
         ("iev".to_string(), iev::subject as fn() -> String),
+        ("ini1".to_string(), ini1::subject as fn() -> String),
         ("iprb".to_string(), iprb::subject as fn() -> String),
         ("prot".to_string(), prot::subject as fn() -> String),
         ("revc".to_string(), revc::subject as fn() -> String),
