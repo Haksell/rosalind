@@ -1,7 +1,7 @@
-use crate::parsing::{parse_fasta, read_all, Fasta};
+use crate::parsing::{read_fasta, Fasta};
 
 pub fn subject() -> String {
-    let fasta = parse_fasta(&read_all());
+    let fasta = read_fasta();
     let (name, gc_content) = solve(&fasta);
     format!("{}\n{}", name, gc_content * 100.0)
 }
@@ -21,6 +21,7 @@ fn calculate_gc_content(dna: &str) -> f64 {
 #[cfg(test)]
 mod tests {
     use super::*;
+    use crate::parsing::parse_fasta;
 
     #[test]
     fn test_solve() {

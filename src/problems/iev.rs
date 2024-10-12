@@ -1,5 +1,5 @@
 pub fn subject() -> String {
-    let (a, b, c, d, e, f) = tints!(6, u64);
+    let (a, b, c, d, e, f) = read!(u64, u64, u64, u64, u64, u64);
     solve(a, b, c, d, e, f).to_string()
 }
 

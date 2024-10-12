@@ -1,8 +1,8 @@
-use crate::parsing::{parse_fasta, read_all, Fasta};
+use crate::parsing::{read_fasta, Fasta};
 use itertools::Itertools as _;
 
 pub fn subject() -> String {
-    let fasta = parse_fasta(&read_all());
+    let fasta = read_fasta();
     solve(&fasta, 3)
         .iter()
         .map(|(a, b)| format!("{a} {b}"))
@@ -27,6 +27,7 @@ fn solve(strands: &[Fasta], k: usize) -> Vec<(&String, &String)> {
 #[cfg(test)]
 mod tests {
     use super::*;
+    use crate::parsing::parse_fasta;
 
     #[test]
     fn test_solve() {

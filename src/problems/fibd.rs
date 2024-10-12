@@ -1,9 +1,9 @@
 pub fn subject() -> String {
-    let (n, m) = tints!(2, u128);
+    let (n, m) = read!(u32, usize);
     solve(n, m).to_string()
 }
 
-fn solve(n: u128, m: u128) -> u128 {
+fn solve(n: u32, m: usize) -> u128 {
     let mut wabbits = vec![0; m as usize];
     wabbits[0] = 1;
     for _ in 0..n - 1 {

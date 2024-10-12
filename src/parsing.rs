@@ -1,5 +1,3 @@
-use std::{io::Read as _, str::FromStr};
-
 pub fn input() -> String {
     let mut s = String::new();
     std::io::stdin().read_line(&mut s).unwrap();
@@ -7,44 +5,38 @@ pub fn input() -> String {
 }
 
 pub fn read_all() -> String {
-    let mut s = String::new();
-    std::io::stdin().read_to_string(&mut s).unwrap();
-    s
+    std::io::read_to_string(std::io::stdin()).unwrap()
 }
 
-pub fn vints<T>() -> Vec<T>
-where
-    T: FromStr,
-    T::Err: std::fmt::Debug,
-{
-    input()
-        .split_whitespace()
-        .map(|s| s.parse::<T>().unwrap())
-        .collect()
-}
+// pub fn read_vec<T>() -> Vec<T>
+// where
+//     T: FromStr,
+//     T::Err: std::fmt::Debug,
+// {
+//     input()
+//         .split_whitespace()
+//         .map(|s| s.parse::<T>().unwrap())
+//         .collect()
+// }
 
-macro_rules! tints {
-    (2, $t:ty) => {{
-        let v = crate::parsing::vints::<$t>();
-        if v.len() != 2 {
-            panic!("Expected 2 elements, but got {}", v.len());
+macro_rules! read {
+    ( $( $t:ty ),* ) => {
+        {
+            let stdin = std::io::stdin();
+            let mut line = String::new();
+            stdin.read_line(&mut line)
+                .expect("Failed to read line");
+            let mut iter = line.trim().split_whitespace();
+            (
+                $(
+                    iter.next()
+                        .expect("Not enough input values")
+                        .parse::<$t>()
+                        .expect("Failed to parse input"),
+                )*
+            )
         }
-        (v[0], v[1])
-    }};
-    (3, $t:ty) => {{
-        let v = crate::parsing::vints::<$t>();
-        if v.len() != 3 {
-            panic!("Expected 3 elements, but got {}", v.len());
-        }
-        (v[0], v[1], v[2])
-    }};
-    (6, $t:ty) => {{
-        let v = crate::parsing::vints::<$t>();
-        if v.len() != 6 {
-            panic!("Expected 6 elements, but got {}", v.len());
-        }
-        (v[0], v[1], v[2], v[3], v[4], v[5])
-    }};
+    };
 }
 
 #[derive(Debug)]
@@ -68,4 +60,8 @@ pub fn parse_fasta(input: &str) -> Vec<Fasta> {
         dna_strands.push(Fasta::new(name, content));
     }
     dna_strands
+}
+
+pub fn read_fasta() -> Vec<Fasta> {
+    parse_fasta(&read_all())
 }

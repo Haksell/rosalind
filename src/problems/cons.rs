@@ -1,8 +1,8 @@
-use crate::parsing::{parse_fasta, read_all, Fasta};
+use crate::parsing::{read_fasta, Fasta};
 use itertools::Itertools as _;
 
 pub fn subject() -> String {
-    let fasta = parse_fasta(&read_all());
+    let fasta = read_fasta();
     let (consensus, counts) = solve(&fasta);
     let counts_fmt = "ACGT"
         .chars()
@@ -54,6 +54,7 @@ fn solve(dna_strands: &[Fasta]) -> (String, Vec<[usize; 4]>) {
 #[cfg(test)]
 mod tests {
     use super::*;
+    use crate::parsing::parse_fasta;
 
     #[test]
     fn test_empty() {
