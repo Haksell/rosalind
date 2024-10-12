@@ -3,6 +3,7 @@ mod dna;
 mod fib;
 mod fibd;
 mod gc;
+mod grph;
 mod hamm;
 mod iprb;
 mod prot;
@@ -20,6 +21,7 @@ lazy_static! {
         ("fib".to_string(), fib::subject as fn() -> String),
         ("fibd".to_string(), fibd::subject as fn() -> String),
         ("gc".to_string(), gc::subject as fn() -> String),
+        ("grph".to_string(), grph::subject as fn() -> String),
         ("hamm".to_string(), hamm::subject as fn() -> String),
         ("iprb".to_string(), iprb::subject as fn() -> String),
         ("prot".to_string(), prot::subject as fn() -> String),

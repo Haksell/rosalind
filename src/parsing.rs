@@ -40,6 +40,7 @@ macro_rules! tints {
     }};
 }
 
+#[derive(Debug)]
 pub struct Fasta {
     pub name: String,
     pub content: String,
