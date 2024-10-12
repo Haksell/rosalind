@@ -1,3 +1,4 @@
+mod cons;
 mod dna;
 mod fib;
 mod gc;
@@ -13,6 +14,7 @@ use std::collections::HashMap;
 
 lazy_static! {
     pub static ref PROBLEMS: HashMap<String, fn() -> String> = HashMap::from([
+        ("cons".to_string(), cons::subject as fn() -> String),
         ("dna".to_string(), dna::subject as fn() -> String),
         ("fib".to_string(), fib::subject as fn() -> String),
         ("gc".to_string(), gc::subject as fn() -> String),
