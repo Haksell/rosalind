@@ -38,6 +38,13 @@ macro_rules! tints {
         }
         (v[0], v[1], v[2])
     }};
+    (6, $t:ty) => {{
+        let v = crate::parsing::vints::<$t>();
+        if v.len() != 6 {
+            panic!("Expected 6 elements, but got {}", v.len());
+        }
+        (v[0], v[1], v[2], v[3], v[4], v[5])
+    }};
 }
 
 #[derive(Debug)]
