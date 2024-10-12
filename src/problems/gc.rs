@@ -1,21 +1,15 @@
-use crate::parsing::read_all;
+use crate::parsing::{parse_fasta, read_all, Fasta};
 
 pub fn subject() -> String {
-    let mut dna_strands = vec![];
-    for part in read_all().split('>').skip(1) {
-        let mut parts = part.splitn(2, '\n');
-        let name = parts.next().unwrap().to_string();
-        let content = parts.next().unwrap().replace("\n", "");
-        dna_strands.push((name, content));
-    }
-    let (name, gc_content) = solve(&dna_strands);
+    let fasta = parse_fasta(&read_all());
+    let (name, gc_content) = solve(&fasta);
     format!("{}\n{}", name, gc_content * 100.0)
 }
 
-fn solve(dna_strands: &[(String, String)]) -> (&String, f64) {
+fn solve(dna_strands: &[Fasta]) -> (&String, f64) {
     dna_strands
         .iter()
-        .map(|(name, content)| (name, calculate_gc_content(content)))
+        .map(|fasta| (&fasta.name, calculate_gc_content(&fasta.content)))
         .max_by(|a, b| a.1.partial_cmp(&b.1).unwrap())
         .unwrap()
 }
@@ -30,33 +24,17 @@ mod tests {
 
     #[test]
     fn test_solve() {
-        let input = [
-            (
-                "Rosalind_6404".to_string(),
-                [
-                    "CCTGCGGAAGATCGGCACTAGAATAGCCAGAACCGTTTCTCTGAGGCTTCCGGCCTTCCC",
-                    "TCCCACTAATAATTCTGAGG",
-                ]
-                .join(""),
-            ),
-            (
-                "Rosalind_5959".to_string(),
-                [
-                    "CCATCGGTAGCGCATCCTTAGTCCAATTAAGTCCCTATCCAGGCGCTCCGCCGAAGGTCT",
-                    "ATATCCATTTGTCAGCAGACACGC",
-                ]
-                .join(""),
-            ),
-            (
-                "Rosalind_0808".to_string(),
-                [
-                    "CCACCCTCGTGGTATGGCTAGGCATTCAGGAACCGGAGAACGCTTCAGACCAGCCCGGAC",
-                    "TGGGAACCTGCGGGCAGTAGGTGGAAT",
-                ]
-                .join(""),
-            ),
-        ];
-        let (name, gc_content) = solve(&input);
+        let input = ">Rosalind_6404
+CCTGCGGAAGATCGGCACTAGAATAGCCAGAACCGTTTCTCTGAGGCTTCCGGCCTTCCC
+TCCCACTAATAATTCTGAGG
+>Rosalind_5959
+CCATCGGTAGCGCATCCTTAGTCCAATTAAGTCCCTATCCAGGCGCTCCGCCGAAGGTCT
+ATATCCATTTGTCAGCAGACACGC
+>Rosalind_0808
+CCACCCTCGTGGTATGGCTAGGCATTCAGGAACCGGAGAACGCTTCAGACCAGCCCGGAC
+TGGGAACCTGCGGGCAGTAGGTGGAAT";
+        let fasta = parse_fasta(&input);
+        let (name, gc_content) = solve(&fasta);
         assert_eq!(name, "Rosalind_0808");
         assert_is_close!(gc_content, 0.6091954);
     }

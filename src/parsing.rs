@@ -39,3 +39,25 @@ macro_rules! mints {
         (v[0], v[1], v[2])
     }};
 }
+
+pub struct Fasta {
+    pub name: String,
+    pub content: String,
+}
+
+impl Fasta {
+    pub fn new(name: String, content: String) -> Self {
+        Self { name, content }
+    }
+}
+
+pub fn parse_fasta(input: &str) -> Vec<Fasta> {
+    let mut dna_strands = vec![];
+    for part in input.split('>').skip(1) {
+        let mut parts = part.splitn(2, '\n');
+        let name = parts.next().unwrap().to_string();
+        let content = parts.next().unwrap().replace("\n", "");
+        dna_strands.push(Fasta::new(name, content));
+    }
+    dna_strands
+}
